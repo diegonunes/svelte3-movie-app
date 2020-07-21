@@ -1,8 +1,18 @@
 <script>
 
+  const svelteLogo = '/images/svelte-logo.svg';
+  const tmdbLogo = '/images/tmdb_logo.svg'
+
 </script>
 
-Header
+<header class="wrapper">
+  <div class="content">
+    <a href="/" aria-label="Go Home">
+      <img src={svelteLogo} alt="svelte logo" class="svelte-logo" />
+    </a>
+    <img src={tmdbLogo} alt="tmdb logo" class="tmdb-logo">
+  </div>
+</header>
 
 <style>
   .wrapper {

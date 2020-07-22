@@ -1,8 +1,13 @@
 <script>
-
+  export let header;
 </script>
 
-Grid
+<div class="wrapper">
+  <h1>{header}</h1>
+  <div class="content">
+    <slot />
+  </div>
+</div>
 
 <style>
   .wrapper {

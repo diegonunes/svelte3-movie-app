@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { fetchMovies } from '../api';
   // Config
-  import { IMAGE_BASE_URL, BACKDROP_SIZE } from '../config'
+  import { IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE } from '../config'
   // Components
   import Hero from "../components/Hero.svelte";
   import Search from "../components/Search.svelte";
@@ -53,13 +53,14 @@
 {/if}
 <Search on:search={handleSearch}/>
 <Grid header={searchTerm ? 'Search Result' : 'Popular Movies'}>
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
+  {#each movies.movies as movie}
+    <Thumb
+      clickable
+      image={movie.poster_path && IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path}
+      movieId={movie.id}
+    />
+  {/each}
 </Grid>
-<Thumb />
 <LoadMoreButton />
 <Spinner />
 

@@ -28,6 +28,12 @@
     isLoading = false;
   }
 
+  const handleSearch = event => {
+    searchTerm = event.detail.searchText;
+    movies.movies = [];
+    handleFetchMovies(false, searchTerm);
+  }
+
   onMount(async () => {
     handleFetchMovies(false, searchTerm);
   })
@@ -35,7 +41,7 @@
 </script>
 
 {#if error}
-  <p><Something went wrong...</p>
+  <p>Something went wrong...</p>
 {:else}
   {#if movies.heroImage && !searchTerm}
     <Hero
@@ -44,8 +50,8 @@
       text={movies.heroImage.overview}
     />
   {/if}
-</if>
-<Search />
+{/if}
+<Search on:search={handleSearch}/>
 <Grid />
 <Thumb />
 <LoadMoreButton />

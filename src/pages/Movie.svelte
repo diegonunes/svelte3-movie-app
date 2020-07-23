@@ -39,7 +39,7 @@
   <p>Something went wrong ... </p>
 {:else if movie}
   <div transition:fade={{ duration:300 }}>
-    <Navigation />
+    <Navigation movie={movie.original_title} />
     <MovieInfo />
     <MovieInfoBar />
     <Grid header="Actors" />

@@ -30,8 +30,21 @@
   }
 
   onMount(async () => {
-    handleFetchMovie();
-  })
+    const localMovie = window.localStorage.getItem(params.id);
+    if (localMovie) {
+      console.log('Grabbing from localStorage');
+      movie = JSON.parse(localMovie);
+    } else {
+      console.log('Grabbing from API');
+      handleFetchMovie();
+    }
+  });
+
+  $: {
+    if (movie) {
+      window.localStorage.setItem(params.id, JSON.stringify(movie));
+    }
+  }
 
 </script>
 
@@ -41,9 +54,16 @@
   <div transition:fade={{ duration:300 }}>
     <Navigation movie={movie.original_title} />
     <MovieInfo {movie} />
-    <MovieInfoBar />
-    <Grid header="Actors" />
-    <Actor />
+    <MovieInfoBar
+      time={movie.runtime}
+      budget={movie.budget}
+      revenue={movie.revenue}
+    />
+    <Grid header="Actors">
+      {#each movie.actors as actor}
+        <Actor {actor} />
+      {/each}
+    </Grid>
   </div>
 {/if}
 
